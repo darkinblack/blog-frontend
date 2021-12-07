@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AddPostService} from '../add-post.service';
 import {PostPayload} from '../add-post/post-payload';
@@ -10,6 +10,7 @@ import {PostPayload} from '../add-post/post-payload';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  // @Output()
   post: PostPayload;
   permaLink: Number;
 

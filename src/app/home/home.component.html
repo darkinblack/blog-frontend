@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" style="background: #f1f1f1;">
   <div class="container">
     <div class="row" *ngFor="let post of posts | async">
       <div class="blogpost">
@@ -6,9 +6,9 @@
         <div>
           <i class="fas fa-user"></i> date: <p>{{post.date.substring(0,10)}}</p>
         </div>
-        <p *ngIf="post.detail.length>10" [innerHTML]="post.detail.substring(0,10)"></p>
+        <p *ngIf="post.detail.length>100" [innerHTML]="post.detail.substring(0,100)"></p>
 
-        <p *ngIf="post.detail.length<=10"   [innerHTML]="post.detail"></p>
+        <p *ngIf="post.detail.length<=100"   [innerHTML]="post.detail"></p>
         <div>
           <a type="button" href="/post/{{post.id}}" class="read-more btn btn-default">Read More</a>
         </div>

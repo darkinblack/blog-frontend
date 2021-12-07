@@ -18,18 +18,6 @@ export class EditComponent implements OnInit {
   title = new FormControl('');
   body = new FormControl('');
   constructor(private postService: AddPostService, private router: Router, private activatedRoute: ActivatedRoute) {
-    // this.activatedRoute.params.subscribe(params => {
-    //   this.permaLink = params['id'];
-    // });
-    //
-    // this.postService.getPost(this.permaLink).subscribe((data: PostPayload) => {
-    //   this.post = data;
-    // }, (err: any) => {
-    //   console.log('Failure Response');
-    // });
-    //
-    // console.log(this.post.title);
-    //
     this.addPostForm = new FormGroup({
       title: this.title,
       body: this.body
@@ -53,22 +41,21 @@ export class EditComponent implements OnInit {
     }, (err: any) => {
       console.log('Failure Response');
     });
-    this.title = new FormControl(this.post.title);
-    this.addPostForm = new FormGroup({
-      title: this.title,
-      body: this.body
-    });
-    this.postPayload = {
-      id: '',
-      detail: '',
-      title: '',
-      date: ''
-    };
   }
-  addPost() {
+  editPost() {
     this.postPayload.detail = this.addPostForm.get('body').value;
+    if (this.postPayload.detail === '') {
+      this.postPayload.detail = this.post.detail;
+    }
+
     this.postPayload.title = this.addPostForm.get('title').value;
-    this.postService.addPost(this.postPayload).subscribe(data => {
+    if (this.postPayload.title === '') {
+      this.postPayload.title = this.post.title;
+    }
+    this.postPayload.id = this.post.id;
+    this.postPayload.date = this.post.date;
+    console.log(this.postPayload);
+    this.postService.editPost(this.postPayload).subscribe(data => {
       this.router.navigateByUrl('/');
     }, error => {
       console.log('Failure Response');
